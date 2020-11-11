@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Danh sách khách hàng</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Mã khách hàng</th>
+                                <th class="border-top-0">Tên khách hàng</th>
+                                <th class="border-top-0">Email</th>
+                                <th class="border-top-0">Địa chỉ</th>
+                                <th class="border-top-0">Số điện thoại</th>
+                                <th class="border-top-0">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: black;">
+                            <tr *ngFor="let row of kh;let i=index">
+                                <td>{{ row.makh }}</td>
+                                <td>{{ row.tenkh }}</td>
+                                <td>{{ row.emailkh }}</td>
+                                <td>{{ row.diachikh }}</td>
+                                <td>{{ row.phonekh }}</td>
+                                <td>
+                                    <a class="sua">
+                                        <span class="fa fa-edit"></span>
+                                    </a> <br>
+                                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="xoa">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modals-->
+<div bsModal #modalAddEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Thêm/Sửa quyền</h4>
+                <button type="button" class="close pull-right" (click)="modalAddEdit.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body">
+                .......
+            </div>
+        </div>
+    </div>
+</div>

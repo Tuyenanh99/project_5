@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "doan5Chuan"
+    }
+  },
+  "defaultProject": "doan5Chuan",
+  "cli": {
+    "analytics": "c0b148d5-2855-4420-a6de-a87f2be6f798"
+  }
 }

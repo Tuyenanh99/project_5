@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Danh sách loại sản phẩm</h3>
+                <button class="btn btn-default" (click)="showAddModal()" style="    background: blue;">Thêm</button>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Mã loại</th>
+                                <th class="border-top-0">Tên loạii</th>
+                                <th class="border-top-0">Mô tả</th>
+                                <th class="border-top-0">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: black;">
+                            <tr *ngFor="let row of loai;let i=index">
+                                <td>{{ row.maloai }}</td>
+                                <td>{{ row.tenloai }}</td>
+                                <td>{{ row.mota }}</td>
+                                <td>
+                                    <a class="sua">
+                                        <span class="fa fa-edit" (click)="showEdit(row.maloai)"></span>
+                                    </a> <br>
+                                    <a (click)="deletItem(row.maloai)" class="xoa">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modals-->
+<div bsModal #modalAddEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Thêm loại sản phẩm</h4>
+                <button type="button" class="close pull-right" (click)="modalAddEdit.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form #FormValue="ngForm" class="was-validated" *ngIf="entity" (ngSubmit)="Save(FormValue.value)">
+                    <div class="form-group">
+                        <label for="">Tên loại:</label>
+                        <input type="hidden" class="form-control" #maloai="ngModel" [(ngModel)]="entity.maloai" name="maloai">
+                        <input type="text" class="form-control" #tenloai="ngModel" [(ngModel)]="entity.tenloai" name="tenloai" placeholder="Nhập Tên loại ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mô tả:</label>
+                        <input type="text" class="form-control" #mota="ngModel" [(ngModel)]="entity.mota" name="mota" placeholder="Nhập mô tả loại ...">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

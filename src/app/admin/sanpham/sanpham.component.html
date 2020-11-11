@@ -1,0 +1,111 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Danh sách sản phẩm</h3>
+                <button class="btn btn-default" (click)="showAddModal()" style="    background: blue;">Thêm</button>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Mã Sản Phẩm</th>
+                                <th class="border-top-0">Mã Loại</th>
+                                <th class="border-top-0">Tên Sản Phẩm</th>
+                                <th class="border-top-0">Đơn Giá</th>
+                                <th class="border-top-0">Ngày cập nhật</th>
+                                <th class="border-top-0">Hình Ảnh</th>
+                                <th class="border-top-0">Bảo Hành</th>
+                                <th class="border-top-0">Mô Tả</th>
+                                <th class="border-top-0">Số Lượng</th>
+                                <th class="border-top-0">Chức Năng</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: BLACK;">
+                            <tr *ngFor="let row of sanpham;let i=index">
+                                <td>{{ row.masp }}</td>
+                                <td>{{ row.maloai }}</td>
+                                <td>{{ row.tensp }}</td>
+                                <td>{{ row.dongia }}</td>
+                                <td>{{ row.ngaycapnhat }}</td>
+                                <td><img src="../../../assets/Images_SP/{{row.hinhanh}} " alt="" style="width: 50px; height: 50px;"></td>
+                                <td>{{ row.baohanh }}</td>
+                                <td>{{ row.mota }}</td>
+                                <td>{{ row.soluong }}</td>
+                                <td>
+                                    <a class="sua">
+                                        <span class="fa fa-edit" (click)="showEdit(row.masp)"></span>
+                                    </a> <br>
+                                    <a (click)="deletItem(row.masp)" class="xoa">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modals-->
+<div bsModal #modalAddEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Thêm sản phẩm</h4>
+                <button type="button" class="close pull-right" (click)="modalAddEdit.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body">
+                <form #FormValue="ngForm" class="was-validated" *ngIf="entity" (ngSubmit)="Save(FormValue.value)">
+                    <div class="form-group">
+                        <label for="">Tên sản phẩm:</label>
+                        <input type="hidden" class="form-control" #masp="ngModel" [(ngModel)]="entity.masp" name="masp">
+                        <input type="text" class="form-control" #tensp="ngModel" [(ngModel)]="entity.tensp" name="tensp" placeholder="Nhập Tên sản phẩm ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mã loại:</label>
+                        <select name="maloai" class="form-control" #maloai="ngModel" [(ngModel)]="entity.maloai">
+                            <option option >Chọn mã loại</option>
+                            <option *ngFor="let row of loai">{{ row.maloai }}</option>
+                        </select>
+                        <!-- <input type="text" class="form-control" #maloai="ngModel" [(ngModel)]="entity.maloai" name="maloai" placeholder="Nhập mã loại ..."> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Đon giá:</label>
+                        <input type="number" class="form-control" #dongia="ngModel" [(ngModel)]="entity.dongia" name="dongia" placeholder="Nhập dơn giá ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Ngày cập nhật:</label>
+                        <input type="text" class="form-control" #ngaycapnhat="ngModel" [(ngModel)]="entity.ngaycapnhat" name="ngaycapnhat" placeholder="Nhập ngày cập nhật...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Hình ảnh:</label>
+                        <input type="file" name="hinhanh" class="form-control" id="exampleInputPassword1" placeholder="">
+                        <!-- <input type="text" class="form-control" #diaChi="ngModel" [(ngModel)]="entity.diaChi" name="diaChi" placeholder="Nhập địa chỉ nhân viên ..."> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Bảo hành:</label>
+                        <select #baohanh="ngModel" [(ngModel)]="entity.baohanh" name="baohanh" class="form-control input-sm m-bot15">
+                          <option value="6 Tháng">6 Tháng</option>
+                          <option value="12 Tháng">12 Tháng</option>
+                          <option value="18 Tháng">18 Tháng</option>
+                        </select>
+                        <!-- <input type="text" class="form-control" #baohanh="ngModel" [(ngModel)]="entity.baohanh" name="baohanh" placeholder="Nhập thời gian bảo hành ..."> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mô tả:</label>
+                        <input type="text" class="form-control" #mota="ngModel" [(ngModel)]="entity.mota" name="mota" placeholder="Nhập mô tả ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Số lượng:</label>
+                        <input type="number" class="form-control" #soluong="ngModel" [(ngModel)]="entity.soluong" name="soluong" placeholder="Nhập số lượng ...">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

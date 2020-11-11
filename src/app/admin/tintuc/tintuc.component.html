@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Danh sách tin tức</h3>
+                <button class="btn btn-default" (click)="showAddModal()" style="    background: blue;">Thêm</button>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Mã tin túc</th>
+                                <th class="border-top-0">Tiêu đề</th>
+                                <th class="border-top-0">Hình ảnh</th>
+                                <th class="border-top-0">Nội dung</th>
+                                <th class="border-top-0">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: black;">
+                            <tr *ngFor="let row of tintuc;let i=index">
+                                <td>{{ row.maTin }}</td>
+                                <td>{{ row.tieude }}</td>
+                                <td><img src="../../../assets/Images_tintuc/{{row.hinhanh}} " alt="" style="width: 50px; height: 50px;"></td>
+                                <td>{{ row.noidung }}</td>
+                                <td>
+                                    <a class="sua">
+                                        <span class="fa fa-edit" (click)="showEdit(row.maTin)"></span>
+                                    </a> <br>
+                                    <a (click)="deletItem(row.maTin)" class="xoa">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modals-->
+<div bsModal #modalAddEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Thêm Nhân viên</h4>
+                <button type="button" class="close pull-right" (click)="modalAddEdit.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body">
+                <form #FormValue="ngForm" class="was-validated" *ngIf="entity" (ngSubmit)="Save(FormValue.value)">
+                    <div class="form-group">
+                        <label for="">Tiêu đề:</label>
+                        <input type="hidden" class="form-control" #maTin="ngModel" [(ngModel)]="entity.maTin" name="maTin">
+                        <input type="text" class="form-control" #tieude="ngModel" [(ngModel)]="entity.tieude" name="tieude" placeholder="Nhập tiêu đề ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Hình ảnh:</label>
+                        <input type="file" name="hinh_anh" class="form-control" id="exampleInputPassword1" placeholder="">
+                        <!-- <input type="text" class="form-control" #chucVu="ngModel" [(ngModel)]="entity.chucVu" name="chucvu" placeholder="Nhập chức vụ nhân viên ..."> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Nội dung:</label>
+                        <input type="text" class="form-control" #noidung="ngModel" [(ngModel)]="entity.noidung" name="noidung" placeholder="Nhập nội dung...">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

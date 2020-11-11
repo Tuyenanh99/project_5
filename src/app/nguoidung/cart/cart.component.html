@@ -1,0 +1,80 @@
+<div class="donhang" style="width: 1050px; margin: auto; margin-top:20px;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody id="model-giohang">
+            <tr id="" *ngFor="let c of items ">
+                <td>{{ c.tensp }}</td>
+                <td><img src="../../../assets/Images_SP/{{c.hinhanh}}" alt="" style="width: 50px;height: 50px;;"></td>
+                <td><input #inp min="1" max="100" (change)="addQty(c,inp.value)" [value]="c.quantity" type="number">
+                </td>
+                <td id="">{{ c.dongia |number }}</td>
+                <td id="">{{ c.money |number }}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="clearCart(c.masp)">Xoá</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight:bold;">Tổng tiền:</td>
+                <td id="tongtienGH">{{ total |number }} VNĐ</td>
+                <td></td>
+            </tr>
+            <!-- <input type="submit" class="btn btn-primary" value="Cập nhật giỏ hàng" name="update-cart"> -->
+        </tbody>
+    </table>
+</div>
+<div class="g">
+    <div class="t">
+        <h1>Thông tin người đặt hàng</h1>
+    </div>
+</div>
+<form action="dat-hang" method="post">
+    <input hidden name="tong_tien" value="" type="text">
+    <div class="l" style="width: 1100px; height: 630px;">
+        <p>
+            <label for="">
+              Họ và Tên (*)<br>
+              <input required name="hoten" type="text" style="width: 700px; height: 30px;" placeholder="Nhập họ tên">
+          </label>
+        </p>
+        <p>
+            <label for="">
+              Email<br>
+              <input required name="email" type="text" style="width: 700px; height: 30px;" placeholder="Nhập email">
+          </label>
+        </p>
+        <p>
+            <label for="">
+              Địa Chỉ(*)<br>
+              <input required name="diachi" type="text" style="width: 700px; height: 30px;" placeholder="Nhập địa chỉ">
+          </label>
+        </p>
+        <p>
+            <label for="">
+              Số điện thoại (*)<br>
+              <input required name="sdt" type="text" style="width: 700px; height: 30px;" placeholder="Nhập số điện thoại">
+          </label>
+        </p>
+        <div style="display: flex;" class="a">
+
+            <p class="lienhe1">
+                <button type="submit" type="button">MUA HÀNG</button>
+            </p>
+
+            <p class="lienhe1">
+                <a href=""><button type="button" style="float: left;">QUAY LẠI</button></a>
+            </p>
+
+        </div>
+    </div>
+</form>

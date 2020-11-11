@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Danh sách tài khoản</h3>
+                <button class="btn btn-default" (click)="showAddModal()" style="background: blue;">Thêm</button>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">ID</th>
+                                <th class="border-top-0">Tên tài khoản</th>
+                                <th class="border-top-0">Mật khẩu</th>
+                                <th class="border-top-0">Mã nhân viên</th>
+                                <th class="border-top-0">Tên nhân viên</th>
+                                <th class="border-top-0">Chức vụ</th>
+                                <th class="border-top-0">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: black;">
+                            <tr *ngFor="let row of user;let i=index">
+                                <td>{{ row.id }}</td>
+                                <td>{{ row.tenTk }}</td>
+                                <td>{{ row.matKhau }}</td>
+                                <td>{{ row.maNv }}</td>
+                                <td>{{ row.tenNv }}</td>
+                                <td>{{ row.chucVu }}</td>
+                                <td>
+                                    <a class="sua">
+                                        <span class="fa fa-edit" (click)="showEdit(row.id)"></span>
+                                    </a> <br>
+                                    <a (click)="deletItem(row.id)" class="xoa">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modals-->
+<div bsModal #modalAddEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Thêm tài khoản</h4>
+                <button type="button" class="close pull-right" (click)="modalAddEdit.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body">
+                <form #FormValue="ngForm" class="was-validated" *ngIf="entity" (ngSubmit)="Save(FormValue.value)">
+                    <div class="form-group">
+                        <label for="">Tên tài khoản</label>
+                        <input type="hidden" class="form-control" #id="ngModel" [(ngModel)]="entity.id" name="id">
+                        <input type="text" class="form-control" #tenTk="ngModel" [(ngModel)]="entity.tenTk" name="tenTk" placeholder="Nhập ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mật khẩu:</label>
+                        <input type="text" class="form-control" #matKhau="ngModel" [(ngModel)]="entity.matKhau" name="matKhau" placeholder="Nhập  ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mã nhân viên:</label>
+                        <select name="maNv" class="form-control" #maNv="ngModel" [(ngModel)]="entity.maNv">
+                          <option *ngFor="let row of nhanvien">{{ row.maNv }}</option>
+                        </select>
+                        <!-- <input type="number" class="form-control" #maNv="ngModel" [(ngModel)]="entity.maNv" name="maNv" placeholder="Nhập ..."> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Tên nhân viên:</label>
+                        <input type="text" class="form-control" #tenNv="ngModel" [(ngModel)]="entity.tenNv" name="tenNv" placeholder="Nhập  ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Chức vụ:</label>
+                        <input type="text" class="form-control" #chucVu="ngModel" [(ngModel)]="entity.chucVu" name="chucVu" placeholder="Nhập  ...">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

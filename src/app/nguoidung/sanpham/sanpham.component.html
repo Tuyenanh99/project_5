@@ -1,0 +1,48 @@
+<div class="chinh" style="width: 1100px;">
+    <div class="sanpham">
+        <div id="Sanpham">
+            <div id="pham">
+                <h3 class="title" style="font-style: oblique;">
+                    Sản phẩm
+                </h3>
+            </div>
+            <div class="col-xs- col-sm- col-md- col-lg-">
+                <div class="row">
+                    <!-- <ng-container *ngFor="let row of sanpham;let i=index">
+                        <ng-container *ngIf="i<3"> -->
+                    <div class=" col-sm-3 " *ngFor="let row of sanpham;let i=index">
+                        <a [routerLink]="['/sanpham',row.masp]"><img src="../../../assets/Images_SP/{{row.hinhanh}} " alt=" "></a>
+                        <!-- <a href="/sanpham/{{ row.masp }}"><img src="../../../assets/Images_SP/{{row.hinhanh}} " alt=" "></a>  -->
+                        <h5 style="padding-left: 5px ">{{row.tensp}}</h5>
+                        <span style="padding-left: 5px; color:red; ">{{row.dongia | currency : 'VND' : true}}</span>
+                        <button type="button" (click)="addToCart(row)">MUA NGAY</button>
+                    </div>
+                    <!-- </ng-container>
+                    </ng-container> -->
+                </div>
+            </div>
+
+        </div>
+        <nav aria-label="Page navigation example" style="    width: 500px;
+        margin-top: 30px;
+        margin-left: 500px;">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1<span class="sr-only">(current)</span></a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
